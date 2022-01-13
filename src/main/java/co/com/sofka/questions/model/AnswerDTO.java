@@ -6,7 +6,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class AnswerDTO {
-    @NotBlank(message = "Debe existir el userId para este objeto")
+
+    @NotBlank
+    private String id;
+    @NotBlank
     private String userId;
     @NotBlank
     private String questionId;
@@ -15,15 +18,33 @@ public class AnswerDTO {
 
     private Integer position;
 
+    private Integer vote;
+
 
     public AnswerDTO() {
 
     }
 
-    public AnswerDTO(@NotBlank String questionId, @NotBlank String userId, @NotBlank String answer) {
+
+    public AnswerDTO(@NotBlank String userId, @NotBlank String questionId, @NotBlank String answer) {
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
+    }
+
+    public AnswerDTO(@NotBlank String id, @NotBlank String userId, @NotBlank String questionId, @NotBlank String answer) {
+        this.id = id;
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Integer getPosition() {
@@ -57,6 +78,15 @@ public class AnswerDTO {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
     }
 
     @Override

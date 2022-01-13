@@ -1,10 +1,13 @@
 package co.com.sofka.questions.usecases;
 
 import co.com.sofka.questions.collections.Question;
+import co.com.sofka.questions.mapper.MapperQuestion;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
@@ -13,15 +16,18 @@ import static org.mockito.Mockito.*;
 
 class ListUseCaseTest {
 
+    @MockBean
      QuestionRepository repository;
+
+    @SpyBean
      ListUseCase listUseCase;
 
 
     @BeforeEach
     public void setup(){
-        MapperUtils mapperUtils = new MapperUtils();
+        MapperQuestion mapperQuestion = new MapperQuestion();
         repository = mock(QuestionRepository.class);
-        listUseCase = new ListUseCase(mapperUtils, repository);
+        listUseCase = new ListUseCase(mapperQuestion, repository);
     }
 
     @Test

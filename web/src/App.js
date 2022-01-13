@@ -1,13 +1,13 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
-  Redirect,
+  
 } from 'react-router-dom'
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 import { login, logout } from './actions/authActions';
 
 import { PublicNavbar, PrivateNavbar } from './components/Navbar'
@@ -20,12 +20,12 @@ import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCTySyvuIDPg7RWF6ceuuwC2t3BEiAK38o",
-  authDomain: "question-app-demo.firebaseapp.com",
-  projectId: "question-app-demo",
-  storageBucket: "question-app-demo.appspot.com",
-  messagingSenderId: "1038673531562",
-  appId: "1:1038673531562:web:da90421f639a3115dcf6d3"
+  apiKey: "AIzaSyDZp-1WGvD5x1c0g_dAo2z_RNkuLUKE21g",
+  authDomain: "questions-answers-sofka.firebaseapp.com",
+  projectId: "questions-answers-sofka",
+  storageBucket: "questions-answers-sofka.appspot.com",
+  messagingSenderId: "821910269983",
+  appId: "1:821910269983:web:b749313b9866acc780652a"
 });
 
 const auth = firebase.auth();
@@ -40,29 +40,29 @@ const App = ({ dispatch }) => {
       {user ?
         <>
           <PrivateNavbar />
-          <Switch>
-            <Route exact path="/" component={() => {
+          <Routes>
+            <Route exact path="/" element={() => {
               return <HomePage><SignOut dispatch={dispatch} /></HomePage>
             }} />
-            <Route exact path="/questions" component={QuestionsPage} />
-            <Route exact path="/question/:id" component={SingleQuestionPage} />
-            <Route exact path="/list" component={OwnerQuestionsPage} />
-            <Route exact path="/answer/:id" component={AnswerFormPage} />
-            <Route exact path="/new" component={QuestionFormPage} />
-            <Redirect to="/" />
-          </Switch>
+            <Route exact path="/questions" element={QuestionsPage} />
+            <Route exact path="/question/:id" element={SingleQuestionPage} />
+            <Route exact path="/list" element={OwnerQuestionsPage} />
+            <Route exact path="/answer/:id" element={AnswerFormPage} />
+            <Route exact path="/new" element={QuestionFormPage} />
+            <Route to="/" />
+          </Routes>
         </> :
         <>
           <PublicNavbar />
-          <Switch>
-            <Route exact path="/" component={() => {
+          <Routes>
+            <Route exact path="/" element={() => {
               return <HomePage><SignIn dispatch={dispatch} /></HomePage>
             }} />
-            <Route exact path="/questions" component={QuestionsPage} />
-            <Route exact path="/question/:id" component={SingleQuestionPage} />
-            <Route exact path="/answer/:id" component={AnswerFormPage} />
-            <Redirect to="/" />
-          </Switch>
+            <Route exact path="/questions" element={QuestionsPage} />
+            <Route exact path="/question/:id" element={SingleQuestionPage} />
+            <Route exact path="/answer/:id" element={AnswerFormPage} />
+            <Route to="/" />
+          </Routes>
         </>
       }
     </Router>

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {  fetchQuestion, postAnswer } from '../actions/questionActions'
 import { connect } from 'react-redux'
 import { Question } from '../components/Question'
@@ -8,7 +8,7 @@ import { Question } from '../components/Question'
 const FormPage = ({ dispatch, loading, redirect, match,hasErrors, question, userId }) => {
     const { register, handleSubmit } = useForm();
     const { id } = match.params
-    const history = useHistory();
+    const history = useNavigate();
 
     const onSubmit = data => {
         data.userId =  userId;
