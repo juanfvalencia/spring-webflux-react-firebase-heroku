@@ -1,5 +1,6 @@
 package co.com.sofka.questions.usecases;
 
+import co.com.sofka.questions.mapper.MapperQuestion;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.reposioties.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -12,17 +13,17 @@ import java.util.function.Function;
 @Validated
 public class OwnerListUseCase implements Function<String, Flux<QuestionDTO>> {
     private final QuestionRepository questionRepository;
-    private final MapperUtils mapperUtils;
+    private final MapperQuestion mapperQuestion;
 
-    public OwnerListUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
+    public OwnerListUseCase(MapperQuestion mapperQuestion, QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
-        this.mapperUtils = mapperUtils;
+        this.mapperQuestion = mapperQuestion;
     }
 
 
     @Override
     public Flux<QuestionDTO> apply(String userId) {
         return questionRepository.findByUserId(userId)
-                .map(mapperUtils.mapEntityToQuestion());
+                .map(mapperQuestion.questionToQuestion());
     }
 }
