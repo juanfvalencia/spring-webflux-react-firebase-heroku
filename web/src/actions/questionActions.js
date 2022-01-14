@@ -105,7 +105,7 @@ export function deleteAnswer(id) {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
-                    'Contect-Type': 'application.json'
+                    'Content-Type': 'application.json'
                 }
             }        
         )
