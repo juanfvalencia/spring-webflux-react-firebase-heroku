@@ -37,7 +37,7 @@ const SingleQuestionPage = ({ match }) => {
               });
               dispatch(deleteAnswer(id))
           } else {
-              swal("uff, que bueno que preguntamos");
+              swal("uff, siempre es bueno rectificar");
           }
       });
   }
