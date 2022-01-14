@@ -15,6 +15,8 @@ public class AnswerDTO {
     private String questionId;
     @NotBlank
     private String answer;
+    @NotBlank
+    private String userEmail;
 
     private Integer position;
 
@@ -87,6 +89,14 @@ public class AnswerDTO {
 
     public void setVote(Integer vote) {
         this.vote = vote;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     @Override
