@@ -13,10 +13,10 @@ public class MapperAnswer {
     public Function<AnswerDTO, Answer> answerDtoToAnswer() {
         return updateAnswer -> {
             var answer = new Answer();
-            answer.setPosition(updateAnswer.getPosition());
-            answer.setQuestionId(updateAnswer.getQuestionId());
             answer.setUserId(updateAnswer.getUserId());
+            answer.setQuestionId(updateAnswer.getQuestionId());
             answer.setAnswer(updateAnswer.getAnswer());
+            answer.setPosition(updateAnswer.getPosition());
             answer.setVote(updateAnswer.getVote());
             return answer;
         };
@@ -25,8 +25,8 @@ public class MapperAnswer {
     public Function<Answer, AnswerDTO> answerToAnswerDto() {
         return entity -> new AnswerDTO(
                 entity.getId(),
-                entity.getQuestionId(),
                 entity.getUserId(),
+                entity.getQuestionId(),
                 entity.getAnswer()
         );
     }

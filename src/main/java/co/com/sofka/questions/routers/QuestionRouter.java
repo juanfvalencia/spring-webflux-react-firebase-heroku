@@ -4,6 +4,7 @@ import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import co.com.sofka.questions.usecases.*;
+import co.com.sofka.questions.usecases.answer.DeleteAnswerUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -96,6 +97,17 @@ public class QuestionRouter {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> deleteAnswer(DeleteAnswerUseCase deleteAnswerUseCase) {
+        return route(
+                DELETE("/deleteAnswer/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.accepted()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(deleteAnswerUseCase.apply(request.pathVariable("id")), Void.class))
+                        .onErrorResume(throwable -> ServerResponse.badRequest().body(throwable.getMessage(), String.class))
+        );
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> update(UpdateUseCase updateUseCase) {
         Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> updateUseCase.apply(questionDTO)
                 .flatMap(result -> ServerResponse.ok()
@@ -110,7 +122,7 @@ public class QuestionRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> findByCategory(FindAllByCategory findAllByCategory) {
+    public RouterFunction<ServerResponse> findAllByCategory(FindAllByCategory findAllByCategory) {
 
         return route(
                 GET("filterCategory/{category}").and(accept(MediaType.APPLICATION_JSON)),
@@ -122,7 +134,7 @@ public class QuestionRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> verifyUserUseCase(VerifyUserUseCase verifyUserUseCase) {
+    public RouterFunction<ServerResponse> userUseCase(VerifyUserUseCase verifyUserUseCase) {
         Function<QuestionDTO, Mono<ServerResponse>> executor = questionDTO -> verifyUserUseCase.verifyUserQuestion(questionDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.TEXT_PLAIN)
@@ -136,7 +148,7 @@ public class QuestionRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> verifyAnswerVoteUseCase(VerifyAnswerVoteUseCase verifyAnswerVoteUseCase) {
+    public RouterFunction<ServerResponse> answerVoteUseCase(VerifyAnswerVoteUseCase verifyAnswerVoteUseCase) {
         Function<AnswerDTO, Mono<ServerResponse>> executor = answerDTO -> verifyAnswerVoteUseCase.verifyAnswerVote(answerDTO)
                 .flatMap(result -> ServerResponse.ok()
                         .contentType(MediaType.TEXT_PLAIN)

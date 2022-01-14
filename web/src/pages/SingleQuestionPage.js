@@ -1,35 +1,57 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-
 import { fetchQuestion } from '../actions/questionActions'
-
+import { deleteAnswer } from '../actions/questionActions'
+import { useDispatch, useSelector } from 'react-redux'
 import { Question } from '../components/Question'
 import { Answer } from '../components/Answer'
 import { Link } from 'react-router-dom'
 
-const SingleQuestionPage = ({
-  match,
-  dispatch,
-  question,
-  hasErrors,
-  loading,
-  userId
-}) => {
+const SingleQuestionPage = ({ match }) => {
+
+  const questions = useSelector(state => state.question);
+  const userId = useSelector(state => state.auth.id);
+
+  const dispatch = useDispatch();
   const { id } = match.params
+
   useEffect(() => {
     dispatch(fetchQuestion(id))
   }, [dispatch, id])
 
-  const renderQuestion = () => {
-    if (loading.question) return <p>Loading question...</p>
-    if (hasErrors.question) return <p>Unable to display question.</p>
+  useEffect(() => {
+    dispatch(fetchQuestion(id))
+  }, [questions.redirect, dispatch. userId]);
 
-    return <Question question={question} />
+  const onDelete = (id) => {
+    swal({
+      title: "¿Eliminar?",
+      text: "¡Recuerda, si eliminas la respuesta no podrás recuperarla!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+  })
+      .then((eliminar) => {
+          if (eliminar) {
+              swal("¡Se ha eliminado con exito!", {
+                  icon: "success",
+              });
+              dispatch(deleteAnswer(id))
+          } else {
+              swal("uff, que bueno que preguntamos");
+          }
+      });
+  }
+
+    const renderQuestion = () => {
+    if (questions.loading.question) return <p>Loading question...</p>
+    if (questions.hasErrors.question) return <p>Unable to display question.</p>
+
+    return <Question question={questions.question} />
   }
 
   const renderAnswers = () => {
-    return (question.answers && question.answers.length) ? question.answers.map(answer => (
-      <Answer key={answer.id} answer={answer} />
+    return (questions.question.answers && questions.question.answers.length) ? questions.question.answers.map(answer => (
+      <Answer key={answer.id} answer={answer} userId={userId} onDelete={onDelete}/>
     )) : <p>Empty answer!</p>;
   }
 
@@ -46,11 +68,4 @@ const SingleQuestionPage = ({
   )
 }
 
-const mapStateToProps = state => ({
-  question: state.question.question,
-  loading: state.question.loading,
-  hasErrors: state.question.hasErrors,
-  userId: state.auth.uid
-})
-
-export default connect(mapStateToProps)(SingleQuestionPage)
+export default SingleQuestionPage
