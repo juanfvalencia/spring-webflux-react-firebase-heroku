@@ -29,7 +29,7 @@ public class MapperQuestion {
                 entity.getQuestion(),
                 entity.getType(),
                 entity.getCategory(),
-                entity.getPhotoUrl()
+                entity.getPhotoUrl("photoUrl.com")
         );
     }
 }

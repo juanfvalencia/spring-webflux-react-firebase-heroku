@@ -26,15 +26,21 @@ class CreateUseCaseTest {
     void createQuestion(){
 
         var questionDto =  new QuestionDTO(
-                "1",
+                "001",
+                "xxx",
                 "Que es Spring",
                 "OPEN",
-                "SOFTWARE DEVELOPMENT"
+                "SOFTWARE DEVELOPMENT",
+                "photoURL.com"
         );
 
         var question = new Question();
         question.setId("001");
-        question.setQuestion("¿En que año?");
+        question.setUserId("xxx");
+        question.setQuestion("¿Que es Spring");
+        question.setType("SOFTWARE DEVELOPMENT");
+        question.setCategory("OPEN");
+        question.setPhotoUrl("photoURL.com");
 
         Mockito.when(questionRepository.save(Mockito.any(Question.class))).thenReturn(Mono.just(question));
 

@@ -55,7 +55,7 @@ public class Question {
         this.category = category;
     }
 
-    public String getPhotoUrl() {
+    public String getPhotoUrl(String s) {
         return photoUrl;
     }
 
