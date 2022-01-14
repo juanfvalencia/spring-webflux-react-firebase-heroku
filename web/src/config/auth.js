@@ -11,21 +11,21 @@ firebase.initializeApp({
     appId: "1:821910269983:web:b749313b9866acc780652a"
   });
 
-  const auth = firebase.auth();
+export const auth = firebase.auth();
 
-  export function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
-  }
+export function signup(email, password) {
+  return auth.createUserWithEmailAndPassword(email, password);
+}
 
 export function signin(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+  return auth.signInWithEmailAndPassword(email, password);
 }
 
 export function logoutu() {
-    return auth.signOut();
+  return auth.signOut();
 }
 
 export const signInWithGoogle = () => {
-    const provider = new firebase.auth.GoogleAuthProvider();
-    auth.signInWithPopup(provider);
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider);
 };

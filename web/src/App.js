@@ -1,9 +1,8 @@
-import React from 'react'
 import React, { Fragment, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { login, logout, postUser } from './actions/authActions';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './config/auth';
+import { auth } from './config/auth'
 
 import { PublicNavbar, PrivateNavbar } from './components/Navbar'
 import HomePage from './pages/HomePage'
@@ -13,7 +12,7 @@ import QuestionFormPage from './pages/QuestionFormPage'
 import AnswerFormPage from './pages/AnswerFormPage'
 import OwnerQuestionsPage from './pages/OwnerQuestionsPage'
 import Footer from './components/Footer';
-import { useDispatch } from 'react redux';
+import { useDispatch } from 'react-redux';
 import Register from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage"
 import ProfilePage from "./pages/ProfilePage"
