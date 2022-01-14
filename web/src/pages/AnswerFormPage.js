@@ -23,7 +23,7 @@ const FormPage = ({ match }) => {
         data.userEmail = auth.email;
         data.questionId = id;
         data.answer = content;
-        console.log("answer", data);
+        data.photoUrl = auth.photo;
         dispatch(postAnswer(data));
     };
 
@@ -47,18 +47,24 @@ const FormPage = ({ match }) => {
 
     return (
         <section>
-            {renderQuestion()}
-            <h1>New Answer</h1>
-
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <label htmlFor="answer">Answer</label>
-                    <TextArea setContent={setContent} />
-                </div>
-                <button type="submit" className="button" disabled={questions.loading} >{
-                    questions.loading ? "Saving ...." : "Save"
-                }</button>
-            </form>
+            <div className="container-md shadow p-4 mb-3 bg-white rounded from-group mx-10">
+                <div className="text-center">
+                    {renderQuestion()}
+                    <hr></hr>
+                    </div>
+                    <h1>New Answer</h1>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <div>
+                            <label htmlForm="answer">Answer</label>
+                            <TextArea setContent={setContent} />
+                        </div>
+                        <br></br>
+                        <button type="submit" className="btn btn-outline-primary btn-lg" 
+                            disabled={questions.loading} >{
+                            questions.loading ? "Saving ...." : "Save"}
+                        </button>
+                </form>
+            </div>
         </section>
 
     );

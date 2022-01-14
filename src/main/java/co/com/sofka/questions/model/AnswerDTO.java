@@ -17,6 +17,8 @@ public class AnswerDTO {
     private String answer;
     @NotBlank
     private String userEmail;
+    @NotBlank
+    private String photoUrl;
 
     private Integer position;
 
@@ -39,6 +41,14 @@ public class AnswerDTO {
         this.userId = userId;
         this.questionId = questionId;
         this.answer = answer;
+    }
+
+    public AnswerDTO(String id, String userId, String questionId, String answer, String photoUrl) {
+        this.id = id;
+        this.userId = userId;
+        this.questionId = questionId;
+        this.answer = answer;
+        this.photoUrl = photoUrl;
     }
 
     public String getId() {
@@ -97,6 +107,14 @@ public class AnswerDTO {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     @Override
