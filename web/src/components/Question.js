@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export const Question = ({ question, excerpt, onDelete }) => (
-  <article className={excerpt ? 'question-excerpt' : 'question'}>
+export const Question = ({ question, excerpt, onDelete, setCategorySearch }) => {
+
+  const findCategory = () => {
+    setCategorySearch(question.category)
+  }
+  
+  return <article className={excerpt ? 'question-excerpt' : 'question'}>
     <div class="row">
 
         <div class="col-md-auto">
@@ -11,7 +16,10 @@ export const Question = ({ question, excerpt, onDelete }) => (
 
           <div className='col-md-auto'>
           <h2><div dangerouslySetInnerHTML={{__html:question.question}} /></h2>
-          <p>{question.category}  - <small>{question.type}</small></p>
+            <p onClick={findCategory} > 
+              <a className='text-decoration-underline'>{question.category}</a>  - 
+            <small>{question.type}</small>
+          </p>
     
         <div className='row'>
     
@@ -31,4 +39,5 @@ export const Question = ({ question, excerpt, onDelete }) => (
       </div>
     </div>
   </article>
-)
+}
+          
