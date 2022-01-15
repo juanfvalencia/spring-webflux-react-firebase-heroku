@@ -8,7 +8,7 @@ firebase.initializeApp({
     projectId: "questions-answers-sofka",
     storageBucket: "questions-answers-sofka.appspot.com",
     messagingSenderId: "821910269983",
-    appId: "1:821910269983:web:b749313b9866acc780652a"
+    appId: "1:821910269983:web:f1a1d07d1e7c01ab80652a"
   });
 
 export const auth = firebase.auth();
